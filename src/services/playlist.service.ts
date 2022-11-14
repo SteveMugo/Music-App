@@ -18,7 +18,11 @@ export const findAllPlaylists = async () => {
     return await playlistModel.find();
 };
 
+export const updatePlayList = async (id:string, input: Partial<Playlist>) => {
+    const playList = await playlistModel.findByIdAndUpdate(id, input);
+};
+
 export const deletePlaylistById = async (id:string) => {
-    const playlist = await playlistModel.remove(id).lean();
+    const playlist = await playlistModel.findByIdAndRemove(id).lean();
     return omit(playlist);
-}
+};
