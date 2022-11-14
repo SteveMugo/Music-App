@@ -3,7 +3,8 @@ import {
     index,
     modelOptions,
     pre,
-    prop
+    prop,
+    types
 } from "@typegoose/typegoose";
 
 @index({ id: 1 })
@@ -27,8 +28,8 @@ export class Playlist {
     @prop({ required: true })
     playtime: string | undefined;
 
-    @prop()
-    trackList!: Array<string>;
+    @prop({required: true})
+    trackList!: {types: 'ObjectId', ref: 'Track'}
 
 }
 

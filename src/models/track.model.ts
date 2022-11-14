@@ -18,13 +18,13 @@ import {
 })
 
 export class Track {
-    @prop()
+    @prop({ default: 'Unknown name' })
     name!: string;
 
-    @prop({ required: true })
+    @prop({ required: true, default: 'Unknown album' })
     album: string | undefined;
 
-    @prop({ required: true })
+    @prop({ required: true, default: 'Unknown artist' })
     artist: string | undefined;
 
     @prop({ required: true })
@@ -35,7 +35,6 @@ export class Track {
 
     @prop()
     audio!: string;
-
 }
 
 const trackModel = getModelForClass(Track);
