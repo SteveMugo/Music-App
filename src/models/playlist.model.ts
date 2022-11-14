@@ -6,6 +6,8 @@ import {
     prop
 } from "@typegoose/typegoose";
 
+import { Schema } from "mongoose";
+
 @index({ id: 1 })
 @pre<Playlist>('save', async function () {
     
@@ -28,7 +30,7 @@ export class Playlist {
     playtime: string | undefined;
 
     @prop({ required: true })
-    trackList!: Array<string>;
+    trackList!: {type: Schema.Types.ObjectId, ref: 'Track'} // TODO:: remove ArrayArray<string>;
 
 }
 
