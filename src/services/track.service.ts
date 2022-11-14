@@ -23,8 +23,9 @@ export const findTrackById = async (id:string) => {
     return omit(track);
 }
 
-export const updatePlayList = async (id:string, input: Partial<Track>) => {
-    const playList = await trackModel.findByIdAndUpdate(id, input);
+export const updateTrackById = async (id:string, input: Partial<Track>) => {
+    const track = await trackModel.findByIdAndUpdate(id, input).lean();
+    return omit(track);
 };
 
 export const deleteTrackById = async (id:string) => {

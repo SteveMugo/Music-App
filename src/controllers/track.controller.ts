@@ -71,6 +71,24 @@ export const getTrackHandler = (
   }
 }
 
+export const updateTrackHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const track = res.locals.track;
+    res.status(200).json({
+      status: 'success',
+      data: {
+        track,
+      },
+    });
+  } catch (err: any) {
+    next(err);
+  }
+}
+
 export const deleteTrackHandler = (
   req: Request,
   res: Response,

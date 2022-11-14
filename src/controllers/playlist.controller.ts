@@ -2,7 +2,7 @@ import { buildSchema } from "@typegoose/typegoose";
 import { NextFunction, Request, Response } from "express";
 import { Schema } from "mongoose";
 import { CreatePlaylistInput } from "../schema/playlist.schema";
-import { createPlaylist, findAllPlaylists } from "../services/playlist.service";
+import { createPlaylist, findAllPlaylists, updatePlayList } from "../services/playlist.service";
 
 export const playlistHandler = async (
     req: Request<{}, {}, CreatePlaylistInput>,
@@ -71,6 +71,24 @@ export const playlistHandler = async (
     }
   }
   
+  export const updatePlaylistHandler = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const playlist = res.locals.playlist; // await updatePlayList();
+      res.status(200).json({
+        status: 'success',
+        data: {
+          playlist,
+        },
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }
+
   export const deletePlaylistHandler = (
     req: Request,
     res: Response,
