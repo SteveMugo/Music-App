@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { model } from "mongoose";
+import trackModel, { Track } from "../models/track.model";
 import { CreatePlaylistInput } from "../schema/playlist.schema";
 import { createPlaylist } from "../services/playlist.service";
 
@@ -8,17 +10,17 @@ export const playlistHandler = async (
     next: NextFunction
   ) => {
     try {
-      const track = await createPlaylist({
+      const playList = await createPlaylist({
         name: req.body.name,
         creator: req.body.creator,
         playtime: req.body.playtime,
-        trackList: [req.body.trackList],
+        trackList: new Track('Track', trackModel),
       });
   
       res.status(201).json({
         status: 'success',
         data: {
-            track,
+          playList,
         },
       });
     } catch (err: any) {
