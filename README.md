@@ -3,7 +3,7 @@ Simfy Africa - Technical Assesment
 
 ### clone project - (has public access)
 git clone git@github.com:SteveMugo/Music-App.git
-Ensure MongoDB is installed
+- Ensure MongoDB is installed
 
 # Create ENV file 
 touch .env production.env
