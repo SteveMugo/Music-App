@@ -1,6 +1,8 @@
+import { buildSchema } from "@typegoose/typegoose";
 import { NextFunction, Request, Response } from "express";
+import { Schema } from "mongoose";
 import { CreatePlaylistInput } from "../schema/playlist.schema";
-import { createPlaylist } from "../services/playlist.service";
+import { createPlaylist, findAllPlaylists } from "../services/playlist.service";
 
 export const playlistHandler = async (
     req: Request<{}, {}, CreatePlaylistInput>,
@@ -12,7 +14,7 @@ export const playlistHandler = async (
         name: req.body.name,
         creator: req.body.creator,
         playtime: req.body.playtime,
-        trackList: [req.body.trackList],
+        // trackList:  {type: buildSchema("Track").childSchemas, ref: "Track"},
       });
   
       res.status(201).json({
@@ -31,3 +33,58 @@ export const playlistHandler = async (
       next(err);
     }
   };
+
+  export const getAllPlaylistsHandler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const playlist = await findAllPlaylists();
+      res.status(200).json({
+        status: 'success',
+        result: playlist.length,
+        data: {
+          playlist,
+        },
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }
+  
+  export const getPlaylistHandler = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const playlist = res.locals.playlist;
+      res.status(200).json({
+        status: 'success',
+        data: {
+          playlist,
+        },
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }
+  
+  export const deletePlaylistHandler = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const playlist = res.locals.playlist;
+      res.status(200).json({
+        status: 'success',
+        data: {
+          playlist,
+        },
+      });
+    } catch (err: any) {
+      next(err);
+    }
+  }

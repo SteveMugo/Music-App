@@ -30,7 +30,7 @@ export class Playlist {
     playtime: string | undefined;
 
     @prop({ required: true })
-    trackList!: {type: Schema.Types.ObjectId, ref: 'Track'} // TODO:: remove ArrayArray<string>;
+    trackList!: {type: Schema.Types.ObjectId, ref: 'Track'}
 
 }
 
